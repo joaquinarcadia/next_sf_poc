@@ -7,14 +7,11 @@ export const authOptions = {
             clientId: process.env.SALESFORCE_CLIENT_ID ?? "",
             clientSecret: process.env.SALESFORCE_CLIENT_SECRET ?? "",
             authorization: {
-                url: `${process.env.SALESFORCE_AUTH_URL}/services/oauth2/authorize`,
                 params: {
-                    response_type: "code",
                     redirect_uri: process.env.SALESFORCE_CALLBACK_URL ?? "",
+                    scope: "api id web refresh_token",
                 },
             },
-            token: `${process.env.SALESFORCE_AUTH_URL}/services/oauth2/token`,
-            userinfo: `${process.env.SALESFORCE_AUTH_URL}/services/oauth2/userinfo`,
         }),
     ],
     secret: process.env.NEXTAUTH_SECRET,
