@@ -12,7 +12,6 @@
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
     "@mui/material": "^6.2.1",
-    "jsforce": "^3.6.3",
     "next": "15.1.1",
     "next-auth": "^4.24.11",
     "react": "^19.0.0",
