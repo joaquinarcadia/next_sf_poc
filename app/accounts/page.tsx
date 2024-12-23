@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react";
 import { Box, CircularProgress, List, ListItem, ListItemText, Typography, Alert } from "@mui/material";
 
+import ProtectedRoute from "@/app/components/ProtectedRoute";
+
 export default function AccountsPage() {
     const [accounts, setAccounts] = useState<any[]>([]);
     const [error, setError] = useState<string | null>(null);
@@ -49,21 +51,24 @@ export default function AccountsPage() {
     }
 
     return (
-        <Box p={3}>
-            <Typography variant="h4" gutterBottom>
-                Salesforce Accounts
-            </Typography>
-            {accounts.length > 0 ? (
-                <List>
-                    {accounts.map((account) => (
-                        <ListItem key={account.Id}>
-                            <ListItemText primary={account.Name} secondary={account.Industry || "Industry not specified"} />
-                        </ListItem>
-                    ))}
-                </List>
-            ) : (
-                <Typography variant="body1">No accounts found.</Typography>
-            )}
-        </Box>
+        <ProtectedRoute>
+            {" "}
+            <Box p={3}>
+                <Typography variant="h4" gutterBottom>
+                    Salesforce Accounts
+                </Typography>
+                {accounts.length > 0 ? (
+                    <List>
+                        {accounts.map((account) => (
+                            <ListItem key={account.Id}>
+                                <ListItemText primary={account.Name} secondary={account.Industry || "Industry not specified"} />
+                            </ListItem>
+                        ))}
+                    </List>
+                ) : (
+                    <Typography variant="body1">No accounts found.</Typography>
+                )}
+            </Box>
+        </ProtectedRoute>
     );
 }

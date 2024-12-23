@@ -2,8 +2,6 @@ import type { Metadata } from "next";
 
 import { getServerSession } from "next-auth";
 
-import { Box } from "@mui/material";
-
 import "./globals.css";
 
 import SessionProvider from "./components/SessionProvider";
@@ -21,21 +19,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <html lang="en">
             <body>
                 <SessionProvider session={session}>
-                    <Box
-                        component="main"
-                        sx={{
-                            height: "100vh",
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
-                            flexDirection: "column",
-                            color: "white",
-                            textAlign: "center",
-                        }}
-                    >
-                        <NavMenu />
-                        {children}
-                    </Box>
+                    <NavMenu>{children}</NavMenu>
                 </SessionProvider>
             </body>
         </html>

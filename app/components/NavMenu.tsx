@@ -24,45 +24,77 @@ function AuthButton() {
     );
 }
 
-export default function NavMenu() {
+export default function NavMenu({ children }: { children: React.ReactNode }) {
+    const { data: session } = useSession();
     const pathname = usePathname();
 
-    const routes = [{ path: "/", label: "Home" }];
+    const routes = [
+        { path: "/", label: "Home" },
+        { path: "/accounts", label: "Accounts", protected: true },
+    ];
 
     return (
         <Box
             sx={{
                 display: "flex",
                 flexDirection: "column",
+                justifyContent: "space-between",
                 alignItems: "center",
-                gap: 2,
+                minHeight: "100vh",
+                padding: 2,
             }}
         >
-            <List>
-                {routes.map(({ path, label }) => (
-                    <Link key={path} href={path} passHref>
-                        <ListItem disablePadding>
-                            <ListItemButton
-                                selected={pathname === path}
-                                sx={{
-                                    "&.Mui-selected": {
-                                        backgroundColor: "gray.700",
-                                        color: "white",
-                                    },
-                                    "&:hover": {
-                                        backgroundColor: "gray.700",
-                                        color: "white",
-                                    },
-                                }}
-                            >
-                                <ListItemText primary={label} />
-                            </ListItemButton>
-                        </ListItem>
-                    </Link>
-                ))}
+            <List
+                sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 2,
+                    marginBottom: 2,
+                }}
+            >
+                {routes
+                    .filter((route) => !route.protected || (route.protected && session))
+                    .map(({ path, label }) => (
+                        <Link key={path} href={path} passHref>
+                            <ListItem disablePadding>
+                                <ListItemButton
+                                    selected={pathname === path}
+                                    sx={{
+                                        "&.Mui-selected": {
+                                            backgroundColor: "gray.700",
+                                            color: "white",
+                                        },
+                                        "&:hover": {
+                                            backgroundColor: "gray.700",
+                                            color: "white",
+                                        },
+                                    }}
+                                >
+                                    <ListItemText primary={label} />
+                                </ListItemButton>
+                            </ListItem>
+                        </Link>
+                    ))}
             </List>
-            <Divider sx={{ width: "100%" }} />
-            <AuthButton />
+
+            <Box
+                component="main"
+                sx={{
+                    flexGrow: 1,
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    width: "100%",
+                }}
+            >
+                {children}
+            </Box>
+
+            <Box sx={{ marginTop: 2 }}>
+                <Divider sx={{ width: "100%", marginBottom: 2 }} />
+                <AuthButton />
+            </Box>
         </Box>
     );
 }
