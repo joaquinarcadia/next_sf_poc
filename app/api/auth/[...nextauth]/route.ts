@@ -1,41 +1,6 @@
 import NextAuth from "next-auth";
-import SalesforceProvider from "next-auth/providers/salesforce";
 
-export const authOptions = {
-    providers: [
-        SalesforceProvider({
-            clientId: process.env.SALESFORCE_CLIENT_ID ?? "",
-            clientSecret: process.env.SALESFORCE_CLIENT_SECRET ?? "",
-            authorization: {
-                params: {
-                    redirect_uri: process.env.SALESFORCE_CALLBACK_URL ?? "",
-                    scope: "api id web refresh_token",
-                },
-            },
-        }),
-    ],
-    callbacks: {
-        async jwt({ token, account }: { token: any; account: any }) {
-            if (account) {
-                token.accessToken = account.access_token;
-                token.refreshToken = account.refresh_token;
-                token.instanceUrl = account.instance_url;
-            }
+import { authOptions } from "../../../lib/auth";
 
-            return token;
-        },
-
-        async session({ session, token }: { session: any; token: any }) {
-            session.accessToken = token.accessToken;
-            session.refreshToken = token.refreshToken;
-            session.instanceUrl = token.instanceUrl;
-
-            return session;
-        },
-    },
-    secret: process.env.NEXTAUTH_SECRET,
-};
-
-export const handler = NextAuth(authOptions);
-
-export { handler as GET, handler as POST };
+export const GET = NextAuth(authOptions);
+export const POST = NextAuth(authOptions);

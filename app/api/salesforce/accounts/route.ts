@@ -4,10 +4,10 @@ import { getServerSession } from "next-auth/next";
 
 import { fetchSalesforceData } from "@/app/services/salesforce";
 
-import { authOptions } from "../../auth/[...nextauth]/route";
+import { authOptions } from "../../../lib/auth";
 
 export async function GET() {
-    const session = await getServerSession(authOptions);
+    const session = (await getServerSession(authOptions)) as any;
 
     if (!session || !session.accessToken || !session.instanceUrl) {
         return NextResponse.json(
