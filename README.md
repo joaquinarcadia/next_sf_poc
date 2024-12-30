@@ -4,6 +4,10 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 First, run the development server:
 
+-   Create a new `.env.local` file with the variables declared in the `env.example` file
+
+Then run
+
 ```bash
 npm run dev
 # or
@@ -74,7 +78,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 -   Check the box for Enable OAuth Settings.
 
-    -   Enter a Callback URL (e.g., http://localhost:3000/api/auth/callback).
+    -   Enter a Callback URL (e.g., http://localhost:3000/api/auth/callback/salesfoce).
     -   Select the appropriate OAuth Scopes (e.g., Access and manage your data (API) or Perform requests on your behalf at any time).
     -   Save and Configure
     -   ![App settings](./public/app_settings.png)
