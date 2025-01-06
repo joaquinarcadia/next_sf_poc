@@ -21,7 +21,7 @@ export default function AccountsPage() {
 
                 const data = await res.json();
 
-                setAccounts(data.records || []);
+                setAccounts(data.recentItems || []);
             } catch (err: any) {
                 console.log(err);
 
@@ -52,7 +52,6 @@ export default function AccountsPage() {
 
     return (
         <ProtectedRoute>
-            {" "}
             <Box p={3}>
                 <Typography variant="h4" gutterBottom>
                     Salesforce Accounts
