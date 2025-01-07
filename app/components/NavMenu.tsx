@@ -29,8 +29,20 @@ export default function NavMenu({ children }: { children: React.ReactNode }) {
     const pathname = usePathname();
 
     const routes = [
-        { path: "/", label: "Home" },
-        { path: "/accounts", label: "Accounts", protected: true },
+        {
+            path: "/",
+            label: "Home",
+        },
+        {
+            path: "/accounts",
+            label: "Accounts",
+            protected: true,
+        },
+        {
+            path: "/upload",
+            label: "Upload",
+            protected: true,
+        },
     ];
 
     return (

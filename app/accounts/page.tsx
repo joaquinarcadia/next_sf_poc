@@ -21,8 +21,6 @@ export default function AccountsPage() {
 
                 const data = await res.json();
 
-                console.log("!!!", data);
-
                 setAccounts(data.recentItems || []);
             } catch (err: any) {
                 console.log(err);
